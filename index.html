@@ -294,6 +294,24 @@ canvas { background-color:rgb(100,200,100);}
               context3.stroke();
     }
     // drawPromt(a[0],b[0])
+    
+    function drawBigPromt()
+    {
+        var mycanvas3 = document.getElementById('mycanvas');
+        var context3 = mycanvas3.getContext('2d');
+        context3.strokeStyle = "rgb(250,100,0)";
+        context3.lineWidth = '3';
+
+        context3.beginPath();
+        context3.moveTo(4, 4);
+        context3.lineTo(536, 4);
+        context3.lineTo(536, 536);
+        context3.lineTo(4, 536);
+        context3.lineTo(4, 4);
+        context3.closePath();
+        context3.stroke();
+    }
+    drawBigPromt()
 
     function erasePromt(p,q)
     {
@@ -312,6 +330,24 @@ canvas { background-color:rgb(100,200,100);}
               context3.stroke();
     }
     // erasePromt(a[0],b[0])
+    
+    function eraseBigPromt()
+    {
+        var mycanvas3 = document.getElementById('mycanvas');
+        var context3 = mycanvas3.getContext('2d');
+        context3.strokeStyle = "rgb(100,200,100)";
+        context3.lineWidth = '4';
+
+        context3.beginPath();
+        context3.moveTo(4, 4);
+        context3.lineTo(536, 4);
+        context3.lineTo(536, 536);
+        context3.lineTo(4, 536);
+        context3.lineTo(4, 4);
+        context3.closePath();
+        context3.stroke();
+    }
+    // eraseBigPromt()
 
 
     var mainBoard = new Array(3);
@@ -353,6 +389,7 @@ canvas { background-color:rgb(100,200,100);}
         {
              currenta = m; currentb = n;
              freeChoice = 0;
+             eraseBigPromt();
         }
 
 
@@ -443,6 +480,7 @@ canvas { background-color:rgb(100,200,100);}
             {
                 erasePromt(a[currenta], b[currentb]);
                 freeChoice = 1;
+                drawBigPromt();
             }
 
          }
