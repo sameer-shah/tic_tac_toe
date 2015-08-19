@@ -1,0 +1,541 @@
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <title> 3x3:3x3 Tic-Tac-Toe </title>
+</head>
+
+<style>
+h1 { color:rgb(240,240,240); background-color:rgb(100,100,200); text-align: center;}
+h3 { color:rgb(100,100,200); background-color:rgb(160,160,160); text-align: center;}
+body { background-image: url("bg1.png"); background-repeat: no-repeat; background-attachment: fixed; background-position: center;  }
+canvas { background-color:rgb(100,200,100);}
+</style>
+
+<body>
+
+<h1>Welcome to 3x3:3x3 Tic-Tac-Toe</h1>
+
+
+<canvas id="mycanvas" style="z-index:1; position:relative; margin-left:400;" width="540" height="540"
+      onmousedrag="moveHandler(event);"
+      onmousedown="mouseDownHandler(event);">
+    This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+
+<div style="position:absolute; left:100; top:100; width:200px; height:80px; background-color:lightblue">
+    <h1> PLAYER 1 </h1>
+</div>
+
+<img id="circle" style="position:absolute; left:125; top:200" src="circle.png" width="150" height="150"></img>
+<img id="circle lose" style="position:absolute; left:125; top:200; visibility:hidden" src="circle lose.png" width="150" height="150"></img>
+<img id="circle win" style="position:absolute; left:100; top:200; visibility:hidden" src="circle.png" width="200" height="200"></img>
+
+<div id="winner1" style="position:absolute; left:100; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
+</div>
+
+<div style="position:absolute; left:1000; top:100; width:200px; height:80px; background-color:red">
+    <h1> PLAYER 2 </h1>
+</div>
+
+<img id="cross" style="position:absolute; left:1025; top:200" src="cross.png" width="150" height="150"></img>
+<img id="cross lose" style="position:absolute; left:1025; top:200; visibility:hidden" src="cross lose.png" width="150" height="150"></img>
+<img id="cross win" style="position:absolute; left:1000; top:200; visibility:hidden" src="cross.png" width="200" height="200"></img>
+
+<div id="winner2" style="position:absolute; left:1000; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
+</div>
+
+<!-- 00 -->
+<button type="button" id='0000' style="z-index:2; position:absolute; left:415; top:76; width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,0,0);"/></button>
+<button type="button" id='0010' style="z-index:2; position:absolute; left:475; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,1,0);"/></button>
+<button type="button" id='0020' style="z-index:2; position:absolute; left:535; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,2,0);"/></button>
+<button type="button" id='0001' style="z-index:2; position:absolute; left:415; top:135; width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,0,1);"/></button>
+<button type="button" id='0011' style="z-index:2; position:absolute; left:475; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,1,1);"/></button>
+<button type="button" id='0021' style="z-index:2; position:absolute; left:535; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,2,1);"/></button>
+<button type="button" id='0002' style="z-index:2; position:absolute; left:415; top:194; width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,0,2);"/></button>
+<button type="button" id='0012' style="z-index:2; position:absolute; left:475; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,1,2);"/></button>
+<button type="button" id='0022' style="z-index:2; position:absolute; left:535; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,2,2);"/></button>
+<!-- 10 -->
+<button type="button" id='1000' style="z-index:2; position:absolute; left:595; top:76; width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,0,0);"/></button>
+<button type="button" id='1010' style="z-index:2; position:absolute; left:655; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,1,0);"/></button>
+<button type="button" id='1020' style="z-index:2; position:absolute; left:715; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,2,0);"/></button>
+<button type="button" id='1001' style="z-index:2; position:absolute; left:595; top:135; width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,0,1);"/></button>
+<button type="button" id='1011' style="z-index:2; position:absolute; left:655; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,1,1);"/></button>
+<button type="button" id='1021' style="z-index:2; position:absolute; left:715; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,2,1);"/></button>
+<button type="button" id='1002' style="z-index:2; position:absolute; left:595; top:194; width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,0,2);"/></button>
+<button type="button" id='1012' style="z-index:2; position:absolute; left:655; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,1,2);"/></button>
+<button type="button" id='1022' style="z-index:2; position:absolute; left:715; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,0,2,2);"/></button>
+<!-- 20 -->
+<button type="button" id='2000' style="z-index:2; position:absolute; left:775; top:76; width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,0,0);"/></button>
+<button type="button" id='2010' style="z-index:2; position:absolute; left:835; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,1,0);"/></button>
+<button type="button" id='2020' style="z-index:2; position:absolute; left:895; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,2,0);"/></button>
+<button type="button" id='2001' style="z-index:2; position:absolute; left:775; top:135; width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,0,1);"/></button>
+<button type="button" id='2011' style="z-index:2; position:absolute; left:835; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,1,1);"/></button>
+<button type="button" id='2021' style="z-index:2; position:absolute; left:895; top:135;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,2,1);"/></button>
+<button type="button" id='2002' style="z-index:2; position:absolute; left:775; top:194; width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,0,2);"/></button>
+<button type="button" id='2012' style="z-index:2; position:absolute; left:835; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,1,2);"/></button>
+<button type="button" id='2022' style="z-index:2; position:absolute; left:895; top:194;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,0,2,2);"/></button>
+<!-- 01 -->
+<button type="button" id='0100' style="z-index:2; position:absolute; left:415; top:256; width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,0,0);"/></button>
+<button type="button" id='0110' style="z-index:2; position:absolute; left:475; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,1,0);"/></button>
+<button type="button" id='0120' style="z-index:2; position:absolute; left:535; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,2,0);"/></button>
+<button type="button" id='0101' style="z-index:2; position:absolute; left:415; top:315; width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,0,1);"/></button>
+<button type="button" id='0111' style="z-index:2; position:absolute; left:475; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,1,1);"/></button>
+<button type="button" id='0121' style="z-index:2; position:absolute; left:535; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,2,1);"/></button>
+<button type="button" id='0102' style="z-index:2; position:absolute; left:415; top:374; width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,0,2);"/></button>
+<button type="button" id='0112' style="z-index:2; position:absolute; left:475; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,1,2);"/></button>
+<button type="button" id='0122' style="z-index:2; position:absolute; left:535; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,1,2,2);"/></button>
+<!-- 11 -->
+<button type="button" id='1100' style="z-index:2; position:absolute; left:595; top:256; width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,0,0);"/></button>
+<button type="button" id='1110' style="z-index:2; position:absolute; left:655; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,1,0);"/></button>
+<button type="button" id='1120' style="z-index:2; position:absolute; left:715; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,2,0);"/></button>
+<button type="button" id='1101' style="z-index:2; position:absolute; left:595; top:315; width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,0,1);"/></button>
+<button type="button" id='1111' style="z-index:2; position:absolute; left:655; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,1,1);"/></button>
+<button type="button" id='1121' style="z-index:2; position:absolute; left:715; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,2,1);"/></button>
+<button type="button" id='1102' style="z-index:2; position:absolute; left:595; top:374; width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,0,2);"/></button>
+<button type="button" id='1112' style="z-index:2; position:absolute; left:655; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,1,2);"/></button>
+<button type="button" id='1122' style="z-index:2; position:absolute; left:715; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,1,2,2);"/></button>
+<!-- 21 -->
+<button type="button" id='2100' style="z-index:2; position:absolute; left:775; top:256; width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,0,0);"/></button>
+<button type="button" id='2110' style="z-index:2; position:absolute; left:835; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,1,0);"/></button>
+<button type="button" id='2120' style="z-index:2; position:absolute; left:895; top:256;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,2,0);"/></button>
+<button type="button" id='2101' style="z-index:2; position:absolute; left:775; top:315; width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,0,1);"/></button>
+<button type="button" id='2111' style="z-index:2; position:absolute; left:835; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,1,1);"/></button>
+<button type="button" id='2121' style="z-index:2; position:absolute; left:895; top:315;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,2,1);"/></button>
+<button type="button" id='2102' style="z-index:2; position:absolute; left:775; top:374; width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,0,2);"/></button>
+<button type="button" id='2112' style="z-index:2; position:absolute; left:835; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,1,2);"/></button>
+<button type="button" id='2122' style="z-index:2; position:absolute; left:895; top:374;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,1,2,2);"/></button>
+<!-- 02 -->
+<button type="button" id='0200' style="z-index:2; position:absolute; left:415; top:436; width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,0,0);"/></button>
+<button type="button" id='0210' style="z-index:2; position:absolute; left:475; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,1,0);"/></button>
+<button type="button" id='0220' style="z-index:2; position:absolute; left:535; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,2,0);"/></button>
+<button type="button" id='0201' style="z-index:2; position:absolute; left:415; top:495; width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,0,1);"/></button>
+<button type="button" id='0211' style="z-index:2; position:absolute; left:475; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,1,1);"/></button>
+<button type="button" id='0221' style="z-index:2; position:absolute; left:535; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,2,1);"/></button>
+<button type="button" id='0202' style="z-index:2; position:absolute; left:415; top:554; width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,0,2);"/></button>
+<button type="button" id='0212' style="z-index:2; position:absolute; left:475; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,1,2);"/></button>
+<button type="button" id='0222' style="z-index:2; position:absolute; left:535; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,2,2,2);"/></button>
+<!-- 12 -->
+<button type="button" id='1200' style="z-index:2; position:absolute; left:595; top:436; width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,0,0);"/></button>
+<button type="button" id='1210' style="z-index:2; position:absolute; left:655; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,1,0);"/></button>
+<button type="button" id='1220' style="z-index:2; position:absolute; left:715; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,2,0);"/></button>
+<button type="button" id='1201' style="z-index:2; position:absolute; left:595; top:494; width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,0,1);"/></button>
+<button type="button" id='1211' style="z-index:2; position:absolute; left:655; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,1,1);"/></button>
+<button type="button" id='1221' style="z-index:2; position:absolute; left:715; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,2,1);"/></button>
+<button type="button" id='1202' style="z-index:2; position:absolute; left:595; top:554; width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,0,2);"/></button>
+<button type="button" id='1212' style="z-index:2; position:absolute; left:655; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,1,2);"/></button>
+<button type="button" id='1222' style="z-index:2; position:absolute; left:715; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(1,2,2,2);"/></button>
+<!-- 22 -->
+<button type="button" id='2200' style="z-index:2; position:absolute; left:775; top:436; width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,0,0);"/></button>
+<button type="button" id='2210' style="z-index:2; position:absolute; left:835; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,1,0);"/></button>
+<button type="button" id='2220' style="z-index:2; position:absolute; left:895; top:436;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,2,0);"/></button>
+<button type="button" id='2201' style="z-index:2; position:absolute; left:775; top:495; width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,0,1);"/></button>
+<button type="button" id='2211' style="z-index:2; position:absolute; left:835; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,1,1);"/></button>
+<button type="button" id='2221' style="z-index:2; position:absolute; left:895; top:495;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,2,1);"/></button>
+<button type="button" id='2202' style="z-index:2; position:absolute; left:775; top:554; width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,0,2);"/></button>
+<button type="button" id='2212' style="z-index:2; position:absolute; left:835; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,1,2);"/></button>
+<button type="button" id='2222' style="z-index:2; position:absolute; left:895; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,2,2);"/></button>
+
+
+
+
+<script type="text/javascript">
+
+      function moveHandler(event)
+      {
+      }
+      function mouseDownHandler(event)
+      {
+      }
+
+    var a = new Array(3);
+    a[0] = 1; a[1] = 181; a[2] = 361;
+    var b = new Array(3);
+    b[0] = 1; b[1] = 181; b[2] = 361;
+
+    var x = new Array(3);
+    x[0] = 1; x[1] = 61; x[2] = 121;
+    var y = new Array(3);
+    y[0] = 1; y[1] = 61; y[2] = 121;
+
+
+      function drawPlayBoard()
+      {
+
+          var mycanvas = document.getElementById('mycanvas');
+          var context = mycanvas.getContext('2d');
+
+          context.strokeStyle = 'rgb(100,100,100)';
+          context.lineWidth = '2';
+
+          for( j=0; j<3; j++)
+          {
+              for( k=0; k<3; k++)
+              {
+
+                  for( i=1; i<3; i++ )
+                  {
+                      context.beginPath();
+                      context.moveTo(a[j]+5, b[k]+y[i]);
+                      context.lineTo(a[j]+175, b[k]+y[i]);
+                      context.closePath();
+                      context.stroke();
+                  }
+
+                  for( i=1; i<3; i++ )
+                  {
+                      context.beginPath();
+                      context.moveTo(a[j]+x[i], b[k]+5);
+                      context.lineTo(a[j]+x[i], b[k]+175);
+                      context.closePath();
+                      context.stroke();
+                  }
+              }
+          }
+
+          context.strokeStyle = "rgb(0,0,0)";
+          context.lineWidth = '2';
+
+          for( i=1; i<3; i++ )
+          {
+              context.beginPath();
+              context.moveTo(5, b[i]);
+              context.lineTo(535, b[i]);
+              context.closePath();
+              context.stroke();
+          }
+
+          for( i=1; i<3; i++ )
+          {
+              context.beginPath();
+              context.moveTo(a[i], 5);
+              context.lineTo(a[i], 535);
+              context.closePath();
+              context.stroke();
+          }
+      }
+      drawPlayBoard();
+
+      function drawCross(p,q)
+      {
+          var mycanvas1 = document.getElementById('mycanvas');
+          var context1 = mycanvas1.getContext('2d');
+          context1.strokeStyle = "rgb(0,0,0)";
+          context1.lineWidth = '3';
+
+          context1.beginPath();
+          context1.moveTo(p+10, q+10);
+          context1.lineTo(p+50, q+50);
+          context1.moveTo(p+10, q+50);
+          context1.lineTo(p+50, q+10);
+          context1.closePath();
+          context1.stroke();
+      }
+    //  drawCross(a[2]+x[1], b[1]+y[0])
+
+      function drawBigCross(p,q)
+      {
+          var mycanvas1 = document.getElementById('mycanvas');
+          var context1 = mycanvas1.getContext('2d');
+          context1.strokeStyle = "rgb(0,0,0)";
+          context1.lineWidth = '5';
+
+          context1.beginPath();
+          context1.moveTo(p+20, q+20);
+          context1.lineTo(p+160, q+160);
+          context1.moveTo(p+20, q+160);
+          context1.lineTo(p+160, q+20);
+          context1.closePath();
+          context1.stroke();
+      }
+    //   drawBigCross(a[2], b[1])
+
+      function drawCircle(p,q)
+      {
+          var mycanvas2 = document.getElementById('mycanvas');
+          var context2 = mycanvas2.getContext('2d');
+          context2.strokeStyle = "rgb(0,0,0)";
+          context2.lineWidth = '3';
+
+          context2.beginPath();
+          context2.arc(p+30, q+30, 20, 0.0, 2*Math.PI, true);
+          context2.closePath();
+          context2.stroke();
+      }
+    //   drawCircle(a[0]+x[2], b[1]+y[0])
+
+      function drawBigCircle(p,q)
+      {
+          var mycanvas2 = document.getElementById('mycanvas');
+          var context2 = mycanvas2.getContext('2d');
+          context2.strokeStyle = "rgb(0,0,0)";
+          context2.lineWidth = '5';
+
+          context2.beginPath();
+          context2.arc(p+90, q+90, 75, 0.0, 2*Math.PI, true);
+          context2.closePath();
+          context2.stroke();
+      }
+    //   drawBigCircle(a[0], b[0])
+
+    function drawPromt(p,q)
+    {
+              var mycanvas3 = document.getElementById('mycanvas');
+              var context3 = mycanvas3.getContext('2d');
+              context3.strokeStyle = "rgb(250,100,0)";
+              context3.lineWidth = '3';
+
+              context3.beginPath();
+              context3.moveTo(p+4, q+4);
+              context3.lineTo(p+176, q+4);
+              context3.lineTo(p+176, q+176);
+              context3.lineTo(p+4, q+176);
+              context3.lineTo(p+4, q+4);
+              context3.closePath();
+              context3.stroke();
+    }
+    // drawPromt(a[0],b[0])
+
+    function erasePromt(p,q)
+    {
+              var mycanvas3 = document.getElementById('mycanvas');
+              var context3 = mycanvas3.getContext('2d');
+              context3.strokeStyle = "rgb(100,200,100)";
+              context3.lineWidth = '4';
+
+              context3.beginPath();
+              context3.moveTo(p+4, q+4);
+              context3.lineTo(p+176, q+4);
+              context3.lineTo(p+176, q+176);
+              context3.lineTo(p+4, q+176);
+              context3.lineTo(p+4, q+4);
+              context3.closePath();
+              context3.stroke();
+    }
+    // erasePromt(a[0],b[0])
+
+
+    var mainBoard = new Array(3);
+
+    for (var i = 0; i < 3; i++)
+    {
+        mainBoard[i] = new Array(3);
+        for (var j = 0; j < 3; j++)
+        {
+            mainBoard[i][j] = 0;
+        }
+    }
+
+    var playBoard = new Array(9);
+
+    for (var i = 0; i < 9; i++)
+    {
+        playBoard[i] = new Array(9);
+        for (var j = 0; j < 9; j++)
+        {
+            playBoard[i][j] = 0;
+        }
+    }
+
+    var count = 0;
+    var player = 0;
+    var freeChoice = 1;
+    var currentx = 0; currenty = 0; newx = 0; newy = 0;
+    var currenta = 0; currentb = 0; newa = 0; newb = 0;
+    var winSubBoard = 0; winMainBoard = 0;
+
+    function playGame(m,n, p,q)
+    {
+        newa = m; newb = n;
+        newx = p; newy = q;
+        player = count%2 + 1;
+
+        if (freeChoice == 1)
+        {
+             currenta = m; currentb = n;
+             freeChoice = 0;
+        }
+
+
+        if (currenta == newa && currentb == newb)
+        {
+            erasePromt(a[currenta], b[currentb]);
+
+            if (player == 1)
+            {
+                drawCircle(a[newa]+x[newx], b[newb]+y[newy]);
+                playBoard[3*newa +newx][3*newb +newy] = 1;
+            }
+
+            if (player == 2)
+            {
+                drawCross(a[newa]+x[newx], b[newb]+y[newy]);
+                playBoard[3*newa +newx][3*newb +newy] = 9;
+            }
+
+            winSubBoard = checkSubWinner(newa, newb);
+            if (winSubBoard > 0)
+            {
+                if(winSubBoard == 1)
+                {
+                    drawBigCircle(a[currenta], b[currentb]);
+                    mainBoard[newa][newb] = 1;
+                    eraseButtons(currenta, currentb);
+                    erasePromt(a[currenta], b[currentb]);
+                }
+
+                if (winSubBoard == 2)
+                {
+                    drawBigCross(a[currenta], b[currentb]);
+                    mainBoard[currenta][currentb] = 9;
+                    eraseButtons(currenta, currentb);
+                    erasePromt(a[currenta], b[currentb]);
+                }
+
+                winMainBoard = checkMainWinner();
+                if(winMainBoard > 0 )
+                {
+                    for(k=0; k<3; k++)
+                    {
+                        for(l=0; l<3; l++)
+                        {
+                            eraseButtons(k,l);
+                        }
+                    }
+                    erasePromt(a[newa], b[newb]);
+
+                    if(winMainBoard == 1 )
+                    {
+                        document.getElementById('circle win').style.visibility='visible';
+                        document.getElementById('cross win').style.visibility='hidden';
+                        document.getElementById('circle lose').style.visibility='hidden';
+                        document.getElementById('cross lose').style.visibility='visible';
+
+                        document.getElementById('winner1').style.visibility='visible';
+                    }
+
+                    if(winMainBoard == 2 )
+                    {
+                        document.getElementById('circle win').style.visibility='hidden';
+                        document.getElementById('cross win').style.visibility='visible';
+                        document.getElementById('circle lose').style.visibility='visible';
+                        document.getElementById('cross lose').style.visibility='hidden';
+
+                        document.getElementById('winner2').style.visibility='visible';
+                    }
+
+
+
+                    winSubBoard = 0;
+                 }
+
+                winSubBoard = 0;
+            }
+
+            count = count + 1;
+            currenta = p; currentb = q;
+
+            buttonName = m.toString()+n.toString()+p.toString()+q.toString();
+            document.getElementById(buttonName).style.visibility='hidden';
+
+            drawPromt(a[currenta], b[currentb]);
+
+            if( mainBoard[currenta][currentb] > 0)
+            {
+                erasePromt(a[currenta], b[currentb]);
+                freeChoice = 1;
+            }
+
+         }
+    }
+
+    var winner = 0; summ = 0;
+
+    function checkSubWinner(m,n)
+    {
+        winner = 0;
+        summ = 0;
+
+        for(i=0; i<3; i++)
+        {
+          summ = playBoard[3*m +i][3*n +0]+ playBoard[3*m +i][3*n +1]+ playBoard[3*m +i][3*n +2];
+          if( summ == 3 ) { winner = 1;  return(winner); }
+          if( summ == 27) { winner = 2;  return(winner); }
+        }
+
+        for(i=0; i<3; i++)
+        {
+          summ = playBoard[3*m +0][3*n +i]+ playBoard[3*m +1][3*n +i]+ playBoard[3*m +2][3*n +i];
+          if( summ == 3 ) { winner = 1;  return(winner); }
+          if( summ == 27) { winner = 2;  return(winner); }
+        }
+
+            summ = playBoard[3*m +0][3*n +0]+ playBoard[3*m +1][3*n +1]+ playBoard[3*m +2][3*n+2];
+            if( summ == 3 ) { winner = 1;  return(winner); }
+            if( summ == 27) { winner = 2;  return(winner); }
+
+            summ = playBoard[3*m +2][3*n +0]+ playBoard[3*m +1][3*n +1]+ playBoard[3*m +0][3*n+2];
+            if( summ == 3 ) { winner = 1;  return(winner); }
+            if( summ == 27) { winner = 2;  return(winner); }
+
+        return(winner);
+    }
+
+    function checkMainWinner()
+    {
+        winner = 0;
+        summ = 0;
+
+        for(i=0; i<3; i++)
+        {
+          summ = mainBoard[i][0] + mainBoard[i][1] + mainBoard[i][2];
+          if( summ == 3 ) { winner = 1;  return(winner); }
+          if( summ == 27) { winner = 2;  return(winner); }
+        }
+
+        for(i=0; i<3; i++)
+        {
+          summ = mainBoard[0][i] + mainBoard[1][i] + mainBoard[2][i];
+          if( summ == 3 ) { winner = 1;  return(winner); }
+          if( summ == 27) { winner = 2;  return(winner); }
+        }
+
+        summ = mainBoard[0][0] + mainBoard[1][1] + mainBoard[2][2];
+        if( summ == 3 ) { winner = 1;  return(winner); }
+        if( summ == 27) { winner = 2;  return(winner); }
+
+        summ = mainBoard[2][0] + mainBoard[1][1] + mainBoard[0][2];
+        if( summ == 3 ) { winner = 1;  return(winner); }
+        if( summ == 27) { winner = 2;  return(winner); }
+
+        return(winner);
+     }
+
+     function eraseButtons(m,n)
+     {
+         for(i=0; i<3; i++)
+         {
+             for(j=0; j<3; j++)
+             {
+                 buttonName = m.toString()+n.toString()+i.toString()+j.toString();
+                 document.getElementById(buttonName).style.visibility='hidden';
+             }
+         }
+
+     }
+    //  eraseButtons(0,0)
+
+
+
+</script>
+
+<h3 style="position:relative; top: 20px">
+Check out this <a href= "http://www.quora.com/Whats-the-best-hack-edit-to-make-the-boring-Tic-Tac-Toe-game-more-interesting" target="_blank">Quora page</a> to know more about this Tic-Tac-Toe
+</h3>
+
+
+<img id="logo" src="our logo 1.png" style="position:relative; left:470; top:50" width="400" height="360" >
+
+
+1
+</body>
+</html>
