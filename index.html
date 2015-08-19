@@ -44,6 +44,12 @@ canvas { background-color:rgb(100,200,100);}
 <div id="winner2" style="position:absolute; left:1000; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
+<div id="Game Over" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> Game Over </h1>
+</div>
+
+<div id="Game Drawn" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> Game Drawn </h1>
+</div>
+
 <!-- 00 -->
 <button type="button" id='0000' style="z-index:2; position:absolute; left:415; top:76; width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,0,0);"/></button>
 <button type="button" id='0010' style="z-index:2; position:absolute; left:475; top:76;  width:47px; height:47px; background-color:transparent" onclick="playGame(0,0,1,0);"/></button>
@@ -448,6 +454,8 @@ canvas { background-color:rgb(100,200,100);}
                         document.getElementById('cross lose').style.visibility='visible';
 
                         document.getElementById('winner1').style.visibility='visible';
+                        document.getElementById('Game Over').style.visibility='visible';
+                       
                     }
 
                     if(winMainBoard == 2 )
@@ -458,6 +466,7 @@ canvas { background-color:rgb(100,200,100);}
                         document.getElementById('cross lose').style.visibility='hidden';
 
                         document.getElementById('winner2').style.visibility='visible';
+                        document.getElementById('Game Over').style.visibility='visible';
                     }
 
 
