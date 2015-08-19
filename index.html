@@ -464,9 +464,13 @@ canvas { background-color:rgb(100,200,100);}
                         for(l=0; l<3; l++)
                         {
                             eraseButtons(k,l);
+                            erasePromt(a[k], b[l]);
                         }
                     }
-
+                    
+                    document.getElementById('player1').style.visibility='visible';
+                    document.getElementById('player2').style.visibility='visible';
+                    
                     erasePromt(a[newx], b[newy]);
                     eraseBigPromt();
 
@@ -491,17 +495,17 @@ canvas { background-color:rgb(100,200,100);}
                         document.getElementById('winner2').style.visibility='visible';
                         document.getElementById('Game Over').style.visibility='visible';
                     }
+                    
+                    if( winSubBoard == 3  )
+                    {
+                        document.getElementById('Game Drawn').style.visibility='visible';
+                    }
 
 
                     winMainBoard = 0;
                  }
 
                 winSubBoard = 0;
-            }
-
-            if( winSubBoard == 3  )
-            {
-                document.getElementById('Game Drawn').style.visibility='visible';
             }
 
             count = count + 1;
