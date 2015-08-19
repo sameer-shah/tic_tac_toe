@@ -476,6 +476,11 @@ canvas { background-color:rgb(100,200,100);}
 
                 winSubBoard = 0;
             }
+            
+            if( winSubBoard == 0 && countMain == 9  )
+            {
+                document.getElementById('Game Drawn').style.visibility='visible';
+            }
 
             count = count + 1;
             currenta = p; currentb = q;
