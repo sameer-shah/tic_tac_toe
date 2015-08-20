@@ -27,8 +27,8 @@ canvas { background-color:rgb(100,200,100);}
 </div>
 
 <img id="circle" style="position:absolute; left:125; top:200; width:150px; height:150px" src="circle.png"></img>
-<img id="circle lose" style="position:absolute; left:125; top:200; width:150px; height:150px; visibility:hidden" src="circle lose.png"></img>
-<img id="circle win" style="position:absolute; left:100; top:200; width:200px; height:200px; visibility:hidden" src="circle.png"></img>
+<img id="circleLose" style="position:absolute; left:125; top:200; width:150px; height:150px; visibility:hidden" src="circle lose.png"></img>
+<img id="circleWin" style="position:absolute; left:100; top:200; width:200px; height:200px; visibility:hidden" src="circle.png"></img>
 
 <div id="winner1" style="position:absolute; left:100; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
@@ -38,16 +38,16 @@ canvas { background-color:rgb(100,200,100);}
 </div>
 
 <img id="cross" style="position:absolute; left:1025; top:200; width:150px; height:150px;" src="cross.png"></img>
-<img id="cross lose" style="position:absolute; left:1025; top:200; width:150px; height:150px; visibility:hidden" src="cross lose.png"></img>
-<img id="cross win" style="position:absolute; left:1000; top:200; width:200px; height:200px; visibility:hidden" src="cross.png"></img>
+<img id="crossLose" style="position:absolute; left:1025; top:200; width:150px; height:150px; visibility:hidden" src="cross lose.png"></img>
+<img id="crossWin" style="position:absolute; left:1000; top:200; width:200px; height:200px; visibility:hidden" src="cross.png"></img>
 
 <div id="winner2" style="position:absolute; left:1000; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
-<div id="Game Over" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Over </h1>
+<div id="gameOver" style="z-index:2; position:absolute; left:578; top:170; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Over </h1>
 </div>
 
-<div id="Game Drawn" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Drawn </h1>
+<div id="matchDrawn" style="z-index:2; position:absolute; left:578; top:320; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Match Drawn </h1>
 </div>
 
 
@@ -390,11 +390,13 @@ canvas { background-color:rgb(100,200,100);}
     var currenta = 0; currentb = 0; newa = 0; newb = 0;
     var winSubBoard = 0; winMainBoard = 0;
     var buttonName = "";
+    var game = "";
 
     function playGame(m,n, p,q)
     {
         newa = m; newb = n;
         newx = p; newy = q;
+        game = "running";
 
         if (freeChoice == 1)
         {
@@ -460,49 +462,38 @@ canvas { background-color:rgb(100,200,100);}
                                     {
                                         if(winMainBoard == 1 )
                                         {
-                                            document.getElementById('circle win').style.visibility='visible';
-                                            document.getElementById('cross win').style.visibility='hidden';
-                                            document.getElementById('circle lose').style.visibility='hidden';
-                                            document.getElementById('cross lose').style.visibility='visible';
+                                            game = "winnerIsPlayer1";
+
+                                            document.getElementById('circle').style.visibility='hidden';
+                                            document.getElementById('cross').style.visibility='hidden';
+                                            document.getElementById('circleWin').style.visibility='visible';
+                                            document.getElementById('crossWin').style.visibility='hidden';
+                                            document.getElementById('circleLose').style.visibility='hidden';
+                                            document.getElementById('crossLose').style.visibility='visible';
 
                                             document.getElementById('winner1').style.visibility='visible';
-                                            document.getElementById('Game Over').style.visibility='visible';
                                         }
 
                                         if(winMainBoard == 2 )
                                         {
-                                            document.getElementById('circle win').style.visibility='hidden';
-                                            document.getElementById('cross win').style.visibility='visible';
-                                            document.getElementById('circle lose').style.visibility='visible';
-                                            document.getElementById('cross lose').style.visibility='hidden';
+                                            game = "winnerIsPlayer2";
+
+                                            document.getElementById('circle').style.visibility='hidden';
+                                            document.getElementById('cross').style.visibility='hidden';
+                                            document.getElementById('circleWin').style.visibility='hidden';
+                                            document.getElementById('crossWin').style.visibility='visible';
+                                            document.getElementById('circleLose').style.visibility='visible';
+                                            document.getElementById('crossLose').style.visibility='hidden';
 
                                             document.getElementById('winner2').style.visibility='visible';
-                                            document.getElementById('Game Over').style.visibility='visible';
                                         }
 
                                         if( winMainBoard == 3  )
                                         {
-                                            document.getElementById('Game Drawn').style.visibility='visible';
+                                            game = "matchIsDrawn";
+
+                                            document.getElementById('matchDrawn').style.visibility='visible';
                                         }
-
-                                        for(k=0; k<3; k++)
-                                        {
-                                            for(l=0; l<3; l++)
-                                            {
-                                                eraseButtons(k,l);
-                                                erasePromt(a[k], b[l]);
-                                            }
-                                        }
-
-                                        document.getElementById('player1').style.visibility='visible';
-                                        document.getElementById('player2').style.visibility='visible';
-                                        document.getElementById('circle').style.visibility='hidden';
-                                        document.getElementById('cross').style.visibility='hidden';
-
-                                        erasePromt(a[newx], b[newy]);
-                                        eraseBigPromt();
-
-
 
                                         winMainBoard = 0;
                                      }
@@ -527,8 +518,25 @@ canvas { background-color:rgb(100,200,100);}
 
          }
 
-    }
+         if(game != "running")
+         {
+             for(k=0; k<3; k++)
+             {
+             for(l=0; l<3; l++)
+             {
+                 eraseButtons(k,l);
+                 erasePromt(a[k], b[l]);
+             }
+             }
 
+             eraseBigPromt();
+
+             document.getElementById("player1").style.visibility="visible";
+             document.getElementById("player2").style.visibility="visible";
+             document.getElementById("gameOver").style.visibility='visible';
+         }
+    }
+    // checked
 
     var winner = 0; summ = 0; countZeros = 0;
 
@@ -645,7 +653,7 @@ Check out this <a href= "http://www.quora.com/Whats-the-best-hack-edit-to-make-t
 <a href= 'https://in.linkedin.com/in/shahsameer1993' target="_blank">  My Linkedin Profile  </a>
 </h3>
 
-
+<!-- ckecked -->
 
 </body>
 </html>
