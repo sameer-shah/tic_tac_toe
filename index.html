@@ -389,12 +389,12 @@ canvas { background-color:rgb(100,200,100);}
     var currentx = 0; currenty = 0; newx = 0; newy = 0;
     var currenta = 0; currentb = 0; newa = 0; newb = 0;
     var winSubBoard = 0; winMainBoard = 0;
+    var buttonName = "";
 
     function playGame(m,n, p,q)
     {
         newa = m; newb = n;
         newx = p; newy = q;
-        player = count%2 + 1;
 
         if (freeChoice == 1)
         {
@@ -410,24 +410,24 @@ canvas { background-color:rgb(100,200,100);}
 
             count = count +1;
             player = count%2 + 1;
-            playerName = 'player'+player.toString();
-            document.getElementById(playerName).style.visibility='visible';
+            playerName = "player"+player.toString();
+            document.getElementById(playerName).style.visibility="visible";
 
 
             count = count -1;
             player = count%2 + 1;
-            playerName = 'player'+player.toString();
-            document.getElementById(playerName).style.visibility='hidden';
+            playerName = "player"+player.toString();
+            document.getElementById(playerName).style.visibility="hidden";
 
             if (player == 1)
             {
-                drawCircle(a[newa]+x[newx], b[newb]+y[newy]);
+                drawCircle(a[newa] +x[newx], b[newb] +y[newy]);
                 playBoard[3*newa +newx][3*newb +newy] = 1;
             }
 
             if (player == 2)
             {
-                drawCross(a[newa]+x[newx], b[newb]+y[newy]);
+                drawCross(a[newa] +x[newx], b[newb] +y[newy]);
                 playBoard[3*newa +newx][3*newb +newy] = 9;
             }
 
@@ -510,11 +510,11 @@ canvas { background-color:rgb(100,200,100);}
                 winSubBoard = 0;
             }
 
+            buttonName = m.toString()+n.toString()+p.toString()+q.toString();
+            document.getElementById(buttonName).style.visibility="hidden";
+
             count = count + 1;
             currenta = p; currentb = q;
-
-            buttonName = m.toString()+n.toString()+p.toString()+q.toString();
-            document.getElementById(buttonName).style.visibility='hidden';
 
             drawPromt(a[currenta], b[currentb]);
 
@@ -529,13 +529,12 @@ canvas { background-color:rgb(100,200,100);}
 
     }
 
+
     var winner = 0; summ = 0; countZeros = 0;
 
     function checkSubWinner(m,n)
     {
-        winner = 0;
-        summ = 0;
-        countZeros = 0;
+        winner = 0; summ = 0; countZeros = 0;
 
         for(i=0; i<3; i++)
         {
@@ -563,18 +562,18 @@ canvas { background-color:rgb(100,200,100);}
             {
                 for(j=0; j<3; j++)
                 {
-                    if(playBoard[i][j]== 0) { countZeros = countZeros +1; }
+                    if(playBoard[3*m +i][3*n +j] == 0) { countZeros = countZeros +1; }
                 }
             }
             if(countZeros == 0) { winner=3; return(winner); }
 
         return(winner);
     }
+    // checked
 
     function checkMainWinner()
     {
-        winner = 0;
-        summ = 0;
+        winner = 0; summ = 0; countZeros = 0;
 
         for(i=0; i<3; i++)
         {
@@ -609,6 +608,7 @@ canvas { background-color:rgb(100,200,100);}
 
         return(winner);
      }
+    //  checked
 
      function eraseButtons(m,n)
      {
