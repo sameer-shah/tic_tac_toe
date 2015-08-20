@@ -408,16 +408,16 @@ canvas { background-color:rgb(100,200,100);}
         {
             erasePromt(a[currenta], b[currentb]);
 
-            count = count +1;
-            player = count%2 + 1;
-            playerName = "player"+player.toString();
-            document.getElementById(playerName).style.visibility="visible";
+                    count = count +1;
+                    player = count%2 + 1;
+                    playerName = "player"+player.toString();
+                    document.getElementById(playerName).style.visibility="visible";
 
 
-            count = count -1;
-            player = count%2 + 1;
-            playerName = "player"+player.toString();
-            document.getElementById(playerName).style.visibility="hidden";
+                    count = count -1;
+                    player = count%2 + 1;
+                    playerName = "player"+player.toString();
+                    document.getElementById(playerName).style.visibility="hidden";
 
             if (player == 1)
             {
@@ -432,82 +432,83 @@ canvas { background-color:rgb(100,200,100);}
             }
 
             winSubBoard = checkSubWinner(newa, newb);
-            if (winSubBoard > 0)
-            {
-                if(winSubBoard == 1)
-                {
-                    drawBigCircle(a[currenta], b[currentb]);
-                    mainBoard[newa][newb] = 1;
-                    eraseButtons(currenta, currentb);
-                    erasePromt(a[currenta], b[currentb]);
-                }
 
-                if (winSubBoard == 2)
-                {
-                    drawBigCross(a[currenta], b[currentb]);
-                    mainBoard[currenta][currentb] = 9;
-                    eraseButtons(currenta, currentb);
-                    erasePromt(a[currenta], b[currentb]);
-                }
-
-                if (winSubBoard == 3)
-                {
-                    mainBoard[currenta][currentb] = 5;
-                    erasePromt(a[currenta], b[currentb]);
-                }
-
-                winMainBoard = checkMainWinner();
-
-                if(winMainBoard > 0 )
-                {
-                    for(k=0; k<3; k++)
-                    {
-                        for(l=0; l<3; l++)
+                        if (winSubBoard > 0)
                         {
-                            eraseButtons(k,l);
-                            erasePromt(a[k], b[l]);
+                            if(winSubBoard == 1)
+                            {
+                                drawBigCircle(a[newa], b[newb]);
+                                eraseButtons(newa, newb);
+                                mainBoard[newa][newb] = 1;
+                            }
+
+                            if (winSubBoard == 2)
+                            {
+                                drawBigCross(a[newa], b[newb]);
+                                eraseButtons(newa, newb);
+                                mainBoard[newa][newb] = 9;
+                            }
+
+                            if (winSubBoard == 3)
+                            {
+                                mainBoard[newa][newb] = 5;
+                            }
+
+                            winMainBoard = checkMainWinner();
+
+                                    if(winMainBoard > 0 )
+                                    {
+                                        if(winMainBoard == 1 )
+                                        {
+                                            document.getElementById('circle win').style.visibility='visible';
+                                            document.getElementById('cross win').style.visibility='hidden';
+                                            document.getElementById('circle lose').style.visibility='hidden';
+                                            document.getElementById('cross lose').style.visibility='visible';
+
+                                            document.getElementById('winner1').style.visibility='visible';
+                                            document.getElementById('Game Over').style.visibility='visible';
+                                        }
+
+                                        if(winMainBoard == 2 )
+                                        {
+                                            document.getElementById('circle win').style.visibility='hidden';
+                                            document.getElementById('cross win').style.visibility='visible';
+                                            document.getElementById('circle lose').style.visibility='visible';
+                                            document.getElementById('cross lose').style.visibility='hidden';
+
+                                            document.getElementById('winner2').style.visibility='visible';
+                                            document.getElementById('Game Over').style.visibility='visible';
+                                        }
+
+                                        if( winMainBoard == 3  )
+                                        {
+                                            document.getElementById('Game Drawn').style.visibility='visible';
+                                        }
+
+                                        for(k=0; k<3; k++)
+                                        {
+                                            for(l=0; l<3; l++)
+                                            {
+                                                eraseButtons(k,l);
+                                                erasePromt(a[k], b[l]);
+                                            }
+                                        }
+
+                                        document.getElementById('player1').style.visibility='visible';
+                                        document.getElementById('player2').style.visibility='visible';
+                                        document.getElementById('circle').style.visibility='hidden';
+                                        document.getElementById('cross').style.visibility='hidden';
+
+                                        erasePromt(a[newx], b[newy]);
+                                        eraseBigPromt();
+
+
+
+                                        winMainBoard = 0;
+                                     }
+
+                            winSubBoard = 0;
                         }
-                    }
-
-                    document.getElementById('player1').style.visibility='visible';
-                    document.getElementById('player2').style.visibility='visible';
-
-                    erasePromt(a[newx], b[newy]);
-                    eraseBigPromt();
-
-                    if(winMainBoard == 1 )
-                    {
-                        document.getElementById('circle win').style.visibility='visible';
-                        document.getElementById('cross win').style.visibility='hidden';
-                        document.getElementById('circle lose').style.visibility='hidden';
-                        document.getElementById('cross lose').style.visibility='visible';
-
-                        document.getElementById('winner1').style.visibility='visible';
-                        document.getElementById('Game Over').style.visibility='visible';
-                    }
-
-                    if(winMainBoard == 2 )
-                    {
-                        document.getElementById('circle win').style.visibility='hidden';
-                        document.getElementById('cross win').style.visibility='visible';
-                        document.getElementById('circle lose').style.visibility='visible';
-                        document.getElementById('cross lose').style.visibility='hidden';
-
-                        document.getElementById('winner2').style.visibility='visible';
-                        document.getElementById('Game Over').style.visibility='visible';
-                    }
-
-                    if( winMainBoard == 3  )
-                    {
-                        document.getElementById('Game Drawn').style.visibility='visible';
-                    }
-
-
-                    winMainBoard = 0;
-                 }
-
-                winSubBoard = 0;
-            }
 
             buttonName = m.toString()+n.toString()+p.toString()+q.toString();
             document.getElementById(buttonName).style.visibility="hidden";
