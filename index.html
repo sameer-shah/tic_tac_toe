@@ -22,32 +22,32 @@ canvas { background-color:rgb(100,200,100);}
     This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 
-<div id='player1'style="position:absolute; left:100; top:100; width:200px; height:80px; background-color:transparent">
+<div id="player1" style="position:absolute; left:100; top:100; width:200px; height:80px; background-color:transparent">
     <h1> PLAYER 1 </h1>
 </div>
 
-<img id="circle" style="position:absolute; left:125; top:200" src="circle.png" width="150" height="150"></img>
-<img id="circle lose" style="position:absolute; left:125; top:200; visibility:hidden" src="circle lose.png" width="150" height="150"></img>
-<img id="circle win" style="position:absolute; left:100; top:200; visibility:hidden" src="circle.png" width="200" height="200"></img>
+<img id="circle" style="position:absolute; left:125; top:200; width:150px; height:150px" src="circle.png"></img>
+<img id="circle lose" style="position:absolute; left:125; top:200; width:150px; height:150px; visibility:hidden" src="circle lose.png"></img>
+<img id="circle win" style="position:absolute; left:100; top:200; width:200px; height:200px; visibility:hidden" src="circle.png"></img>
 
 <div id="winner1" style="position:absolute; left:100; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
-<div id='player2'style="position:absolute; left:1000; top:100; width:200px; height:80px; background-color:transparent">
+<div id="player2" style="position:absolute; left:1000; top:100; width:200px; height:80px; background-color:transparent">
     <h1> PLAYER 2 </h1>
 </div>
 
-<img id="cross" style="position:absolute; left:1025; top:200" src="cross.png" width="150" height="150"></img>
-<img id="cross lose" style="position:absolute; left:1025; top:200; visibility:hidden" src="cross lose.png" width="150" height="150"></img>
-<img id="cross win" style="position:absolute; left:1000; top:200; visibility:hidden" src="cross.png" width="200" height="200"></img>
+<img id="cross" style="position:absolute; left:1025; top:200; width:150px; height:150px;" src="cross.png"></img>
+<img id="cross lose" style="position:absolute; left:1025; top:200; width:150px; height:150px; visibility:hidden" src="cross lose.png"></img>
+<img id="cross win" style="position:absolute; left:1000; top:200; width:200px; height:200px; visibility:hidden" src="cross.png"></img>
 
 <div id="winner2" style="position:absolute; left:1000; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
-<div id="Game Over" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> Game Over </h1>
+<div id="Game Over" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Over </h1>
 </div>
 
-<div id="Game Drawn" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> Game Drawn </h1>
+<div id="Game Drawn" style="z-index:2; position:absolute; left:578; top:330; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Drawn </h1>
 </div>
 
 
@@ -143,7 +143,7 @@ canvas { background-color:rgb(100,200,100);}
 <button type="button" id='2212' style="z-index:2; position:absolute; left:835; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,1,2);"/></button>
 <button type="button" id='2222' style="z-index:2; position:absolute; left:895; top:554;  width:47px; height:47px; background-color:transparent" onclick="playGame(2,2,2,2);"/></button>
 
-
+<!-- checked -->
 
 
 <script type="text/javascript">
@@ -169,10 +169,10 @@ canvas { background-color:rgb(100,200,100);}
       function drawPlayBoard()
       {
 
-          var mycanvas = document.getElementById('mycanvas');
+          var mycanvas = document.getElementById("mycanvas");
           var context = mycanvas.getContext('2d');
 
-          context.strokeStyle = 'rgb(100,100,100)';
+          context.strokeStyle = "rgb(100,100,100)";
           context.lineWidth = '2';
 
           for( j=0; j<3; j++)
@@ -222,10 +222,11 @@ canvas { background-color:rgb(100,200,100);}
           }
       }
       drawPlayBoard();
+    //   ckecked
 
       function drawCross(p,q)
       {
-          var mycanvas1 = document.getElementById('mycanvas');
+          var mycanvas1 = document.getElementById("mycanvas");
           var context1 = mycanvas1.getContext('2d');
           context1.strokeStyle = "rgb(0,0,0)";
           context1.lineWidth = '3';
@@ -242,7 +243,7 @@ canvas { background-color:rgb(100,200,100);}
 
       function drawBigCross(p,q)
       {
-          var mycanvas1 = document.getElementById('mycanvas');
+          var mycanvas1 = document.getElementById("mycanvas");
           var context1 = mycanvas1.getContext('2d');
           context1.strokeStyle = "rgb(0,0,0)";
           context1.lineWidth = '5';
@@ -259,7 +260,7 @@ canvas { background-color:rgb(100,200,100);}
 
       function drawCircle(p,q)
       {
-          var mycanvas2 = document.getElementById('mycanvas');
+          var mycanvas2 = document.getElementById("mycanvas");
           var context2 = mycanvas2.getContext('2d');
           context2.strokeStyle = "rgb(0,0,0)";
           context2.lineWidth = '3';
@@ -273,7 +274,7 @@ canvas { background-color:rgb(100,200,100);}
 
       function drawBigCircle(p,q)
       {
-          var mycanvas2 = document.getElementById('mycanvas');
+          var mycanvas2 = document.getElementById("mycanvas");
           var context2 = mycanvas2.getContext('2d');
           context2.strokeStyle = "rgb(0,0,0)";
           context2.lineWidth = '5';
@@ -287,7 +288,7 @@ canvas { background-color:rgb(100,200,100);}
 
     function drawPromt(p,q)
     {
-              var mycanvas3 = document.getElementById('mycanvas');
+              var mycanvas3 = document.getElementById("mycanvas");
               var context3 = mycanvas3.getContext('2d');
               context3.strokeStyle = "rgb(250,100,0)";
               context3.lineWidth = '3';
@@ -305,7 +306,7 @@ canvas { background-color:rgb(100,200,100);}
 
     function drawBigPromt()
     {
-        var mycanvas3 = document.getElementById('mycanvas');
+        var mycanvas3 = document.getElementById("mycanvas");
         var context3 = mycanvas3.getContext('2d');
         context3.strokeStyle = "rgb(250,100,0)";
         context3.lineWidth = '3';
@@ -323,7 +324,7 @@ canvas { background-color:rgb(100,200,100);}
 
     function erasePromt(p,q)
     {
-              var mycanvas3 = document.getElementById('mycanvas');
+              var mycanvas3 = document.getElementById("mycanvas");
               var context3 = mycanvas3.getContext('2d');
               context3.strokeStyle = "rgb(100,200,100)";
               context3.lineWidth = '4';
@@ -341,7 +342,7 @@ canvas { background-color:rgb(100,200,100);}
 
     function eraseBigPromt()
     {
-        var mycanvas3 = document.getElementById('mycanvas');
+        var mycanvas3 = document.getElementById("mycanvas");
         var context3 = mycanvas3.getContext('2d');
         context3.strokeStyle = "rgb(100,200,100)";
         context3.lineWidth = '4';
@@ -356,6 +357,7 @@ canvas { background-color:rgb(100,200,100);}
         context3.stroke();
     }
     // eraseBigPromt()
+    // ckecked
 
 
     var mainBoard = new Array(3);
@@ -467,10 +469,10 @@ canvas { background-color:rgb(100,200,100);}
                             erasePromt(a[k], b[l]);
                         }
                     }
-                    
+
                     document.getElementById('player1').style.visibility='visible';
                     document.getElementById('player2').style.visibility='visible';
-                    
+
                     erasePromt(a[newx], b[newy]);
                     eraseBigPromt();
 
@@ -495,7 +497,7 @@ canvas { background-color:rgb(100,200,100);}
                         document.getElementById('winner2').style.visibility='visible';
                         document.getElementById('Game Over').style.visibility='visible';
                     }
-                    
+
                     if( winSubBoard == 3  )
                     {
                         document.getElementById('Game Drawn').style.visibility='visible';
