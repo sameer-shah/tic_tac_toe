@@ -5,44 +5,46 @@
 </head>
 
 <style>
-h1 { color:rgb(240,240,240); text-align: center;}
-h2 { color:rgb(240,240,240);  text-align: center;}
- /*background-color:rgb(100,100,250);*/
+h1 { color:rgb(240,240,240); background-color:rgb(200,100,100); text-align: center;}
+h2 { color:rgb(240,240,240); background-color:rgb(200,100,100); text-align: center;}
+ /* background-color:rgb(100,100,250); */
 h3 { color:rgb(50,50,50); background-color:rgb(160,160,160); text-align: center;}
 body { background-image: url("bg1.png"); background-attachment: fixed; }
 canvas { background-color:rgb(100,200,100);}
+/* padding:0; margin:auto; display:block; */
 </style>
 
 <body>
 
 <h1>Welcome to 3x3:3x3 Tic-Tac-Toe</h1>
 
+<!-- position:relative; margin-left:400; -->
 <canvas id="mycanvas" style="z-index:1; position:relative; margin-left:400;" width="540" height="540"
       onmousedrag="moveHandler(event);"
       onmousedown="mouseDownHandler(event);">
     This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 
-<div id="player1" style="position:absolute; left:100; top:100; width:200px; height:80px; background-color:transparent">
+<div id="player1" style="position:absolute; left:100; top:80; width:200px; height:80px; background-color:transparent">
     <h1> PLAYER 1 </h1>
 </div>
 
-<img id="circle" style="position:absolute; left:125; top:200; width:150px; height:150px" src="circle.png"></img>
-<img id="circleLose" style="position:absolute; left:125; top:200; width:150px; height:150px; visibility:hidden" src="circle lose.png"></img>
+<img id="circle" style="position:absolute; left:125; top:160; width:150px; height:150px" src="circle.png"></img>
+<img id="circleLose" style="position:absolute; left:125; top:200; width:150px; height:150px; visibility:hidden" src="circleLose.png"></img>
 <img id="circleWin" style="position:absolute; left:100; top:200; width:200px; height:200px; visibility:hidden" src="circle.png"></img>
 
 <div id="winner1" style="position:absolute; left:100; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
-<div id="player2" style="position:absolute; left:1000; top:100; width:200px; height:80px; background-color:transparent">
+<div id="player2" style="position:absolute; left:1055; top:80; width:200px; height:80px; background-color:transparent">
     <h1> PLAYER 2 </h1>
 </div>
 
-<img id="cross" style="position:absolute; left:1025; top:200; width:150px; height:150px;" src="cross.png"></img>
-<img id="crossLose" style="position:absolute; left:1025; top:200; width:150px; height:150px; visibility:hidden" src="cross lose.png"></img>
-<img id="crossWin" style="position:absolute; left:1000; top:200; width:200px; height:200px; visibility:hidden" src="cross.png"></img>
+<img id="cross" style="position:absolute; left:1080; top:160; width:150px; height:150px;" src="cross.png"></img>
+<img id="crossLose" style="position:absolute; left:1080; top:200; width:150px; height:150px; visibility:hidden" src="crossLose.png"></img>
+<img id="crossWin" style="position:absolute; left:1055; top:200; width:200px; height:200px; visibility:hidden" src="cross.png"></img>
 
-<div id="winner2" style="position:absolute; left:1000; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
+<div id="winner2" style="position:absolute; left:1055; top:450; width:200px; height:80px; background-color:yellow; visibility:hidden">    <h1> WINNER </h1>
 </div>
 
 <div id="gameOver" style="z-index:2; position:absolute; left:578; top:170; width:200px; height:80px; background-color:orange; visibility:hidden">    <h1> Game Over </h1>
@@ -247,7 +249,7 @@ canvas { background-color:rgb(100,200,100);}
           var mycanvas1 = document.getElementById("mycanvas");
           var context1 = mycanvas1.getContext('2d');
           context1.strokeStyle = "rgb(0,0,0)";
-          context1.lineWidth = '5';
+          context1.lineWidth = '10';
 
           context1.beginPath();
           context1.moveTo(p+20, q+20);
@@ -278,7 +280,7 @@ canvas { background-color:rgb(100,200,100);}
           var mycanvas2 = document.getElementById("mycanvas");
           var context2 = mycanvas2.getContext('2d');
           context2.strokeStyle = "rgb(0,0,0)";
-          context2.lineWidth = '5';
+          context2.lineWidth = '10';
 
           context2.beginPath();
           context2.arc(p+90, q+90, 75, 0.0, 2*Math.PI, true);
@@ -292,7 +294,7 @@ canvas { background-color:rgb(100,200,100);}
               var mycanvas3 = document.getElementById("mycanvas");
               var context3 = mycanvas3.getContext('2d');
               context3.strokeStyle = "rgb(250,100,0)";
-              context3.lineWidth = '3';
+              context3.lineWidth = '5';
 
               context3.beginPath();
               context3.moveTo(p+4, q+4);
@@ -310,7 +312,7 @@ canvas { background-color:rgb(100,200,100);}
         var mycanvas3 = document.getElementById("mycanvas");
         var context3 = mycanvas3.getContext('2d');
         context3.strokeStyle = "rgb(250,100,0)";
-        context3.lineWidth = '3';
+        context3.lineWidth = '5';
 
         context3.beginPath();
         context3.moveTo(4, 4);
@@ -328,7 +330,7 @@ canvas { background-color:rgb(100,200,100);}
               var mycanvas3 = document.getElementById("mycanvas");
               var context3 = mycanvas3.getContext('2d');
               context3.strokeStyle = "rgb(100,200,100)";
-              context3.lineWidth = '4';
+              context3.lineWidth = '6';
 
               context3.beginPath();
               context3.moveTo(p+4, q+4);
@@ -346,7 +348,7 @@ canvas { background-color:rgb(100,200,100);}
         var mycanvas3 = document.getElementById("mycanvas");
         var context3 = mycanvas3.getContext('2d');
         context3.strokeStyle = "rgb(100,200,100)";
-        context3.lineWidth = '4';
+        context3.lineWidth = '6';
 
         context3.beginPath();
         context3.moveTo(4, 4);
@@ -645,8 +647,8 @@ Check out this <a href= "http://www.quora.com/Whats-the-best-hack-edit-to-make-t
 </h3>
 
 
-
-<img id="logo" src="our logo 1.png" style="position:relative; left:470; top:50" width="400" height="360" >
+<!-- position:relative; left:470; top:50 -->
+<img id="logo" src="ourLogo.png" style="padding:0; margin:auto; display:block; position:relative; top:30;" width="500" height="300" >
 
 <h3 style="position:relative; top: 40px">
 <a href= 'https://github.com/141Sameer261093' target="_blank">  My Github Profile -  </a>
