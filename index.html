@@ -294,14 +294,14 @@ canvas { background-color:rgb(100,200,100);}
               var mycanvas3 = document.getElementById("mycanvas");
               var context3 = mycanvas3.getContext('2d');
               context3.strokeStyle = "rgb(250,100,0)";
-              context3.lineWidth = '5';
+              context3.lineWidth = '4';
 
               context3.beginPath();
-              context3.moveTo(p+4, q+4);
-              context3.lineTo(p+176, q+4);
-              context3.lineTo(p+176, q+176);
-              context3.lineTo(p+4, q+176);
-              context3.lineTo(p+4, q+4);
+              context3.moveTo(p+5, q+5);
+              context3.lineTo(p+175, q+4);
+              context3.lineTo(p+175, q+175);
+              context3.lineTo(p+5, q+175);
+              context3.lineTo(p+5, q+5);
               context3.closePath();
               context3.stroke();
     }
